@@ -1,3 +1,4 @@
+#Author: Irving Acosta
 import math
 
 # Clase Dispositivo
@@ -18,29 +19,32 @@ class Cable:
     def calculate_diametro(self):
         resistividad = 1.72 * 10**-8  # Se asume que el cable es de cobre.
         radio = ((self.largo * resistividad * self.dispositivo.corriente**2) / (math.pi * self.dispositivo.potencia))**0.5
-        diametro = radio * 2
+        diametro = radio * 2 * 100
         return diametro
     
     def calculate_calibre(self):
-        if 0.163 <= self.diametro < 0.205:
+        if self.diametro <= 0.163:
             return 14
-        elif 0.205 <= self.diametro < 0.259:
+        elif 0.163 < self.diametro <= 0.205:
             return 12
-        elif 0.259 <= self.diametro < 0.326:
+        elif 0.205 < self.diametro <= 0.259:
             return 10
-        elif 0.326 <= self.diametro < 0.412:
+        elif 0.259 < self.diametro <= 0.326:
             return 8
-        elif 0.412 <= self.diametro < 0.462:
+        elif 0.326 < self.diametro <= 0.412:
             return 6
-        elif 0.462 <= self.diametro < 0.519:
+        elif 0.412 < self.diametro <= 0.462:
+            return 6
+        elif 0.462 < self.diametro <= 0.519:
             return 5
-        elif 0.519 <= self.diametro < 1:
+        elif 0.519 < self.diametro <= 1:
             return 4
         return None  # O algún otro valor por defecto
 
+
 # Función para calcular la tarifa a pagar por día de un dispositivo
 def calculate_tariff(dispositivo):
-    price = 0.2
+    price = 2.356041
     tariff_per_day = price * dispositivo.potencia * 10**-3 * dispositivo.hrs_dia
     return tariff_per_day
 
@@ -68,12 +72,19 @@ def dispositivo_con_mayor_suma(dispositivos):
 
     return dispositivo_mayor
 
-# Ejemplo de aplicación
-dispositivo_a = Dispositivo(100.5, 10.2, 4)
-dispositivo_b = Dispositivo(150.3, 15.5, 6)
-dispositivo_c = Dispositivo(120.0, 12.0, 5)
 
-lista_dispositivos = [dispositivo_a, dispositivo_b, dispositivo_c]
+
+
+##############################################################################################################################
+# Ejemplo de aplicación
+dispositivo_a = Dispositivo(5, 0.2, 2)
+dispositivo_b = Dispositivo(23, 5, 8)
+dispositivo_c = Dispositivo(4, 0.2, 12)
+dispositivo_d = Dispositivo(48, 12, 15)
+dispositivo_e = Dispositivo(36, 9, 4)
+dispositivo_f = Dispositivo(10, 2, 9)
+
+lista_dispositivos = [dispositivo_a, dispositivo_b, dispositivo_c, dispositivo_d, dispositivo_e, dispositivo_f]
 
 # Calcular la tarifa total por día para todos los dispositivos
 tarifa_total = day_tariff(lista_dispositivos)
@@ -81,17 +92,14 @@ print("Tarifa total por día para todos los dispositivos:", tarifa_total)
 
 # Encontrar el dispositivo con la mayor suma de potencia y corriente
 dispositivo_mayor = dispositivo_con_mayor_suma(lista_dispositivos)
-print("Dispositivo con la mayor suma de potencia y corriente:")
-print("Potencia:", dispositivo_mayor.potencia)
-print("Corriente:", dispositivo_mayor.corriente)
+#print("Dispositivo con la mayor suma de potencia y corriente:")
+#print("Potencia:", dispositivo_mayor.potencia)
+#print("Corriente:", dispositivo_mayor.corriente)
 
 # Crear un objeto Cable y calcular su diámetro y calibre
-cable = Cable(50, dispositivo_mayor)
+cable = Cable(45, dispositivo_mayor)
 print("Diámetro del cable:", cable.diametro)
 print("Calibre del cable:", cable.calibre)
-
-
-
 
 
 
