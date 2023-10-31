@@ -101,18 +101,3 @@ cable = Cable(45, dispositivo_mayor)
 print("Diámetro del cable:", cable.diametro)
 print("Calibre del cable:", cable.calibre)
 
-
-
-
-
-
-
-
-
-
-
-  
-
-
-    
-
