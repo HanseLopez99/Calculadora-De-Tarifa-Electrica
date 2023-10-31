@@ -352,7 +352,7 @@ class ImageCarousel(QMainWindow):
     def calcular_tarifa(self):
       dispositivos_seleccionados = [Dispositivo(item.potencia, item.corriente, item.hrs_dia) for item in self.selected_devices_details.values()]
       total_tarifa = day_tariff(dispositivos_seleccionados)
-      self.resultados_text.append(f"Tarifa total por día para todos los dispositivos: Q {total_tarifa:.2f} ")
+      self.resultados_text.append(f"Tarifa total por día para todos los dispositivos: Q {total_tarifa:.2f} (Tarifa social: Q 2.356041)")
 
       # Calcular el dispositivo con la mayor suma de potencia y corriente
       dispositivo_mayor = dispositivo_con_mayor_suma(dispositivos_seleccionados)
@@ -400,7 +400,7 @@ class ImageCarousel(QMainWindow):
 
       # Restablecer el índice del carrusel
       self.current_index = 0
-      self.image_stack.setCurrentIndex(self.current_index)
+      
 
       # Limpiar y ocultar los campos de entrada y sus labels
       self.potencia_label.setVisible(True)
